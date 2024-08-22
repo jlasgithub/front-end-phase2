@@ -1,15 +1,57 @@
 import React, { useState } from 'react';
 import './Register.css';
+import axios from 'axios';
+
 
 const Register = () => {
+  const REST_URL = 'http://localhost:8081/account';
+
   const [email, setEmail] = useState('');
   const [userName, setName] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+
+  // Function to generate a random BigInt within a specified range
+function generateRandomBigInt() {
+  const length = 10;
+  // Generate a random number as a string of the specified length
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += Math.floor(Math.random() * 10); // Append a random digit
+  }
+  
+  // Convert the result string to BigInt
+  return Number(result);
+}
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Register:', email, password);
+    const user = {
+      name: userName,
+      email: email,
+      password: password,
+    };
+    console.log(`${user}`);
+    console.log("this is it");
+    let body = JSON.stringify(user);
+    console.log(`${body}`);
+    console.log("body here^");
+    let myHeaders = new Headers({"Content-Type":"application/json"});
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    var myInit = {
+      method: 'POST',
+      body: body,
+      headers: myHeaders,
+      mode: 'cors'
+    }
+    try {
+      const response = await axios.post(`${REST_URL}/register`, body, { headers });      if(response.data.success)  {
+        console.log("help");
+      }
+    } catch(error){
+          console.error("error fetching customers: ", error);}
   };
 
   return (
