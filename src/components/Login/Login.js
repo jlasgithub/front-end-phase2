@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './Login.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const REST_URL = 'http://localhost:8081/account';
 
-
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,14 +23,16 @@ const Login = () => {
 
     };
     console.log('Request body:', body);
+    navigate('/');
+    alert('Login successful');
+    /*
     try {
       const response = await axios.post(`${REST_URL}/token`, body, { headers }, );
-      console.log("in here");
-      if(response.data.success)  {
-        console.log("appke")
-      }
+      
+      
     } catch(error){
-          console.error("error fetching customers: ", error);}
+          console.error("error fetching customers: ", error);}*/
+          
   };
 
   return (

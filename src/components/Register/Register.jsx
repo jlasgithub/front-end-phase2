@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './Register.css';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
   const REST_URL = 'http://localhost:8081/account';
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [userName, setName] = useState('');
@@ -52,6 +55,8 @@ function generateRandomBigInt() {
       }
     } catch(error){
           console.error("error fetching customers: ", error);}
+    navigate('/');
+    alert('Registration successful');
   };
 
   return (

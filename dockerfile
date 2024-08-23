@@ -1,5 +1,5 @@
-#docker build -t phase2-front-end .
-#docker run -d -p 3000:3000 phase2-front-end
+#docker build -t frontend .
+#docker run -d -p 3000:3000 frontend
 
 # Start your image with a node base image
 FROM node:18-alpine
